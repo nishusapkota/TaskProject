@@ -14,7 +14,9 @@ class QuestionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        info($this->title);
         return [
+           
             'title' => $this->title,
             'options' => $this->options,
             'weightage' => $this->weightage,

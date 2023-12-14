@@ -24,7 +24,7 @@ class UpdateQuestionRequest extends FormRequest
         return [
             'title'=>'required|string|max:255',
             'description'=>'nullable|string|max:5000',
-            'slug'=>'required|unique:questions,slug,'.$this->route('question'),
+            'slug'=>'nullable|unique:questions,slug,'.$this->route('question')->id,
             'options'=>'required|array',
             'answer' => ['required', 'in:' . implode(',', request('options'))], 
            'weightage'=>'required|numeric|min:10|max:20',

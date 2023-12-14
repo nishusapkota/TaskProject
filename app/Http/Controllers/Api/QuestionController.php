@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Question;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
@@ -30,6 +31,8 @@ class QuestionController extends Controller
         //$options = $request->has('options') ? $request->options : [];
         $data['options'] = json_encode($request->options);
 
+        $data['slug']=Str::slug($request->title);
+
          $question=Question::create($data);
         return new QuestionResource($question);
 
@@ -50,8 +53,11 @@ class QuestionController extends Controller
     public function update(Question $question,UpdateQuestionRequest $request)
     {
     $data=$request->validated();
-    $question->update($data);
-    return new QuestionResource($question);   
+   
+    $data['slug']=$request->slug ?: $question->slug;
+  
+ $question->update($data);
+ return new QuestionResource($question);   
     }
 
     /**
