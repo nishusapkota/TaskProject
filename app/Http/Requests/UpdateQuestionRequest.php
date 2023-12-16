@@ -22,22 +22,21 @@ class UpdateQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required|string|max:255',
-            'description'=>'nullable|string|max:5000',
-            'slug'=>'nullable|unique:questions,slug,'.$this->route('question')->id,
-            'options'=>'required|array',
-            'answer' => ['required', 'in:' . implode(',', request('options'))], 
-           'weightage'=>'required|numeric|min:10|max:20',
-            'status'=>'nullable|boolean'
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:5000',
+            'slug' => 'required|unique:questions,slug,' . $this->route('question')->id,
+            'options' => 'required|array',
+            'answer' => ['required', 'in:' . implode(',', request('options'))],
+            'weightage' => 'required|numeric|min:10|max:20',
+            'status' => 'nullable|boolean'
         ];
     }
 
-    public function messages():array
+    public function messages(): array
     {
-        return[
-            'answer.in'=>"answer must be one of the option",
+        return [
+            'answer.in' => "answer must be one of the option",
 
         ];
-
     }
 }

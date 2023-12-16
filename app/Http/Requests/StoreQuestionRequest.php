@@ -24,7 +24,7 @@ class StoreQuestionRequest extends FormRequest
         return [
             'title'=>'required|string|max:255',
             'description'=>'nullable|string|max:5000',
-            'slug'=>'nullable|unique:questions,slug',
+            'slug'=>'required|unique:questions,slug',
             'options'=>'required|array',
             'answer' => ['required', 'in:' . implode(',', request('options'))], 
            'weightage'=>'required|numeric|min:10|max:20',

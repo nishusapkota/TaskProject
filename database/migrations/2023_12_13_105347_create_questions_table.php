@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('slug')->required()->unique();
-         $table->json('options');
+            $table->string('slug')->unique();
+            $table->json('options');
             $table->string('answer');
             $table->integer('weightage');
             $table->boolean('status')->default(1);
